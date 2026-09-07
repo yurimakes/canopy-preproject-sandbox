@@ -242,3 +242,61 @@ SpeedTransformer AI Hub 학습 성능 또는 CANOPY 서비스 성능은 아직 �
 2. CANOPY 5-class mapping 후보 검증
 3. label-independent speed preprocessing 정책 결정
 4. SpeedTransformer smoke test
+
+## Label Mapping Audit
+
+### Observed raw folder / label structure
+- WALK: raw label 0
+- BIKE: raw label 1
+- CAR: raw label 2
+- BUS: raw label 3
+- SUBWAY: raw label 5
+- ETC: raw label 6
+
+### Observed detail-label structure
+- WALK: detail 2, 3
+- BIKE: detail 4, 10
+- CAR: detail 5, 12
+- BUS: detail 6
+- SUBWAY: detail 8
+- ETC: detail 9, 11
+
+이번 공개 Training + Validation에서는 detail 7은 관측되지 않음.
+
+### Segment consistency
+- total label segments: 111,850
+- mixed raw-label segments: 0
+- mixed detail-label segments: 0
+
+이 결과는 데이터 내부 label 구조의 일관성을 의미하며
+semantic label correctness를 별도로 검증한 것은 아님.
+
+### Candidate CANOPY 5-class dataset
+Candidate folder classes:
+- WALK
+- BIKE
+- CAR
+- BUS
+- SUBWAY
+
+Candidate included:
+- rows: 6,476,400
+- segments: 107,940
+
+Candidate excluded ETC:
+- rows: 234,600
+- segments: 3,910
+
+최종 mapping은 아직 프로젝트 확정사항이 아님.
+
+Raw label/detail_label은 보존하고,
+모델 학습용 model_label을 별도 생성하는 방향을 후보로 둠.
+
+예:
+- 0 = WALK
+- 1 = BIKE
+- 2 = CAR
+- 3 = BUS
+- 4 = SUBWAY/RAIL candidate
+
+SUBWAY와 RAIL 명칭/정의는 추가 검증 후 확정.
