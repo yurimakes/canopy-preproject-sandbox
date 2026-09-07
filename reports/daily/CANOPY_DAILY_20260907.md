@@ -58,3 +58,10 @@
 3. 연속 sequence 생성 가능성 검증
 4. window 정책 확정
 5. 이후 V3 / SpeedTransformer 동일 UID split 실험 준비
+
+### GitHub 추가 확인
+- GitHub CLI 설치 확인: `gh 2.100.0`
+- GitHub 인증 활성 상태 확인
+- Git operations protocol: HTTPS
+- 원격 저장소 `origin` 연결 및 push 정상
+- 저장소 visibility: CLI 검증 결과 기준 기록
