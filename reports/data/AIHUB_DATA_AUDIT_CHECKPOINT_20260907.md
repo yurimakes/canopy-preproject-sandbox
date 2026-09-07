@@ -132,3 +132,48 @@ GPS coordinate 결측과 최종 preprocessing 조건은 아직 적용하지 않�
 2. 결측을 반영한 실제 usable 120/200 window 수
 3. SID stitching 정책
 4. 최종 5-class mapping
+
+
+## Usable Continuous Window Audit
+
+### Remaining overlap
+- exact-duplicate collapse 이후 negative overlap pairs: 360
+- 공식 Training/Validation 경계 교차: 84
+- shared timestamp 값이 모두 동일한 pairs: 360
+- conflicting pairs: 0
+- point-level overlapping observations: 10,767
+- exact duplicate observations: 10,767
+- conflicting observations: 0
+- conflict TID: 0
+
+Raw 데이터는 수정하지 않음.
+
+### 실제 timestamp 기준 200-sample 연속성
+- 전체 UID/TID: 12,662
+- 200-sample structural window가 존재하는 TID: 10,126
+- structural candidate windows: 2,157,978
+
+좌표 결측을 보간하지 않은 상태:
+- 100% valid-coordinate: 1,024,363 windows / 6,476 TIDs
+- >=95% valid-coordinate: 1,353,849 windows / 7,632 TIDs
+- >=90% valid-coordinate: 1,418,795 windows / 7,860 TIDs
+- >=80% valid-coordinate: 1,502,660 windows / 8,182 TIDs
+
+valid-coordinate는 finite latitude/longitude 기준이며
+Speed feature 품질 또는 최종 모델 사용 가능성을 의미하지 않음.
+
+### SUBWAY
+200-sample structural TIDs: 2,425
+- 100% valid window 보유: 595
+- >=95% valid window 보유: 819
+- >=90% valid window 보유: 892
+- >=80% valid window 보유: 991
+
+SUBWAY는 다른 folder class 대비 GPS 결측 영향이 큰 상태.
+
+## 다음 작업
+1. GPS에서 SpeedTransformer 입력용 speed feature 생성 가능성 감사
+2. impossible speed / jump / zero-distance / missing-speed 패턴 확인
+3. 최종 5-class mapping 확인
+4. clean 200-point dataset 생성 조건 확정
+5. SpeedTransformer smoke test
