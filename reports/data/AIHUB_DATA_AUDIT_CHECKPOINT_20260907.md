@@ -177,3 +177,68 @@ SUBWAY는 다른 folder class 대비 GPS 결측 영향이 큰 상태.
 3. 최종 5-class mapping 확인
 4. clean 200-point dataset 생성 조건 확정
 5. SpeedTransformer smoke test
+
+## Speed Feature Audit
+
+### GPS -> derived speed
+- unique timestamp points: 6,647,553
+- valid coordinate points: 5,028,942
+- invalid coordinate points: 1,618,611
+- coordinate out-of-bounds: 0
+- (0,0) coordinates: 0
+
+1-second continuous edges:
+- total: 6,620,085
+- valid derived-speed edges: 4,965,744
+- invalid derived-speed edges: 1,654,341
+- zero-distance edges: 686,031
+
+No coordinate imputation, clipping, smoothing, or speed filtering was applied.
+
+### Extreme-speed diagnostic
+- maximum observed derived speed: 4,646.963796 m/s
+- maximum-speed folder class: SUBWAY
+- >30 m/s: 26,716
+- >50 m/s: 836
+- >80 m/s: 154
+- >100 m/s: 91
+
+위 threshold들은 진단용이며 삭제 기준으로 확정하지 않음.
+
+### Conservative 200-speed construction
+200개의 pairwise speed를 만들기 위해
+201개의 연속 GPS point를 요구하는 보수적 감사 기준 사용.
+
+- structural windows: 2,142,993
+- structural TIDs: 10,126
+- all-valid-speed windows: 1,015,375
+- all-valid-speed TIDs: 6,465
+
+UID-disjoint split:
+- Train: 815,293 windows / 5,145 TIDs
+- Validation: 92,709 windows / 658 TIDs
+- Internal Test: 107,373 windows / 662 TIDs
+
+### SUBWAY
+- continuous speed edges: 1,784,429
+- valid speed edges: 607,161
+- valid speed edge rate: 34.0255%
+- structural 200-speed TIDs: 2,425
+- all-valid 200-speed TIDs: 595
+
+SUBWAY GPS missingness remains the main data-quality bottleneck.
+
+### Important interpretation
+이 결과는 AI Hub 데이터에서 speed sequence를 구성할 수 있는지에 대한
+데이터 feasibility 결과임.
+
+SpeedTransformer AI Hub 학습 성능 또는 CANOPY 서비스 성능은 아직 확인되지 않음.
+
+또한 200은 SpeedTransformer의 고정 architecture requirement가 아니라
+공식 replication/window-sweep에서 사용된 window-size 후보 중 하나임.
+
+## 다음 작업
+1. AI Hub folder class / label / detail_label 관계 감사
+2. CANOPY 5-class mapping 후보 검증
+3. label-independent speed preprocessing 정책 결정
+4. SpeedTransformer smoke test
