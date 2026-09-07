@@ -1,0 +1,51 @@
+﻿# Python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+
+# AI Hub raw data
+data/raw/
+data/processed/
+data/interim/
+
+# ML artifacts
+checkpoints/
+outputs/
+models/
+*.pt
+*.pth
+*.ckpt
+*.onnx
+*.npz
+*.npy
+
+# User/trajectory manifests
+splits/*.csv
+reports/**/*.csv
+reports/**/*.parquet
+reports/aihub_zip_manifest.csv
+
+# Third-party downloaded documents
+docs/aihub/*.hwp
+docs/aihub/*.pdf
+
+# Archives
+*.zip
+*.tar
+*.7z
+*.part*
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
