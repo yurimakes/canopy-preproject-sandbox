@@ -76,3 +76,59 @@ SUBWAY:
 
 ## 다음 작업
 scripts/07_aihub_sequence_feasibility_audit.py
+
+## Sequence Feasibility Audit
+
+### Exact duplicate
+- duplicate-start groups: 878
+- group size: 모두 2
+- exact-content groups: 878
+- different-content groups: 0
+- 공식 Training/Validation 경계 교차 exact duplicate groups: 190
+- duplicate 그룹 간 coordinate missing count disagreement: 0
+
+동일 start의 878개 그룹은 timestamp, accuracy, latitude,
+longitude, altitude 기준 동일 내용으로 확인됨.
+
+Raw 파일은 수정하지 않았으며 구조 분석에서만 동일 time slot으로 collapse함.
+
+### Collapse 이후 시간 구조
+- raw segments: 111,850
+- unique time slots: 110,972
+- remaining negative-gap pairs: 360
+
+따라서 exact duplicate 878건을 설명한 뒤에도
+부분 시간 중첩 360건이 남아 있으며 원인은 추가 감사 필요.
+
+### 연속 sequence 구조
+- total contiguous runs: 27,828
+- maximum consecutive slots: 80
+- runs >= 2 slots: 23,448
+- runs >= 4 slots: 14,965
+
+### Structural Window Capacity
+UID/TID 기준:
+- total: 12,662
+- >=120 samples: 12,662
+- >=200 sample capacity: 10,123
+
+자체 UID-disjoint split:
+- Train UID/TID: 10,063
+  - >=120: 10,063
+  - >=200: 8,098
+- Validation UID/TID: 1,299
+  - >=120: 1,299
+  - >=200: 984
+- Internal Test UID/TID: 1,300
+  - >=120: 1,300
+  - >=200: 1,041
+
+주의:
+위 결과는 timestamp 및 sample-count 기준 구조적 가능성임.
+GPS coordinate 결측과 최종 preprocessing 조건은 아직 적용하지 않음.
+
+## 다음 확인 필요
+1. 남은 negative-gap 360건의 발생 구조
+2. 결측을 반영한 실제 usable 120/200 window 수
+3. SID stitching 정책
+4. 최종 5-class mapping
