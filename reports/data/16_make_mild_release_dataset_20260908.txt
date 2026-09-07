@@ -1,0 +1,69 @@
+=== STRICT DATASET CHECK ===
+train WALK = 100
+train BIKE = 100
+train CAR = 100
+train BUS = 100
+train SUBWAY = 100
+validation WALK = 30
+validation BIKE = 30
+validation CAR = 30
+validation BUS = 30
+validation SUBWAY = 30
+
+INDEXED UID/TID = 12342
+
+=== MILD CANDIDATE CHECK ===
+WALK candidates = 148 expected = 148
+BIKE candidates = 29 expected = 29
+CAR candidates = 199 expected = 199
+BUS candidates = 134 expected = 134
+SUBWAY candidates = 85 expected = 85
+
+=== SELECTED MILD TRAIN SAMPLES ===
+WALK = 29
+BIKE = 29
+CAR = 29
+BUS = 29
+SUBWAY = 29
+
+=== FINAL DATASET SAMPLE COUNTS ===
+
+TRAIN
+WALK = 129
+BIKE = 129
+CAR = 129
+BUS = 129
+SUBWAY = 129
+
+VALIDATION
+WALK = 30
+BIKE = 30
+CAR = 30
+BUS = 30
+SUBWAY = 30
+
+=== SOURCE POLICY COUNTS ===
+mild_2s_le5_span205 = 145
+strict_1s = 650
+
+=== FINAL CHECK ===
+samples = 795
+rows = 159000
+train samples = 645
+validation samples = 150
+train/validation sample_id overlap = 0
+strict/mild Validation sample_id sets identical = True
+Internal Test included = False
+OUTPUT = data/processed/speedtransformer_mild_release_v1/speed200_mild_release_v1.csv
+
+NOTE:
+- Existing strict Validation samples were preserved unchanged.
+- Mild-release data was added to Train only.
+- Mild Train additions are balanced at 29 samples per class.
+- No interpolation or missing-value imputation.
+- No label-dependent speed cutoff.
+- Mild-release speed uses actual timestamp differences.
+- Raw UID/TID values are not written to the output.
+- This dataset is for a controlled Validation diagnostic, not final performance reporting.
+
+MILD_RELEASE_DATASET_OK
