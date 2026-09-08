@@ -1,0 +1,23 @@
+INDEXED_TRAIN_UID_TID=9817
+=== STRICT ELIGIBLE / UNUSED / SELECTED ===
+WALK eligible=925 unused=825 selected=29
+BIKE eligible=309 unused=209 selected=29
+CAR eligible=1927 unused=1827 selected=29
+BUS eligible=1340 unused=1240 selected=29
+SUBWAY eligible=489 unused=389 selected=29
+=== FINAL CHECK ===
+strict_base_train_samples=500
+additional_strict_train_samples=145
+strict_expanded_train_samples=645
+validation_samples=150
+validation_sample_ids_identical=True
+validation_features_labels_identical=True
+samples=795
+rows=159000
+train_validation_sample_id_overlap=0
+internal_test_samples=0
+mild_release_samples=0
+all_additional_edges_exact_1s=True
+SHA256=54CC016782D14343578E738C84B0CC2AC3CBFFE1871C3A1D005F87B272229A8B
+OUTPUT=data/processed/speedtransformer_strict_expanded_v1/speed200_strict_expanded_v1.csv
+STRICT_EXPANDED_DATASET_OK
